@@ -23,21 +23,21 @@ jobs:
 
   QA:
     runs-on: ubuntu-latest
-#    environment: qa
+    environment: qa
     needs: DEV-APPLY
     steps:
       - run: echo just a dummy job
 
   UAT:
     runs-on: ubuntu-latest
-#    environment: uat
+    environment: uat
     needs: QA
     steps:
       - run: echo just a dummy job
 
   PROD:
     runs-on: self-hosted
-#    environment: prod
+    environment: prod
     needs: UAT
     steps:
       - uses: actions/checkout@v4
