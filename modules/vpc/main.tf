@@ -71,8 +71,9 @@ resource "aws_route_table" "public" {
   }
 
   route {
-    cidr_block = var.default_vpc_cidr
-    vpc_peering_connection_id =aws_vpc_peering_connection.main.id
+    cidr_block                = var.default_vpc_cidr
+    vpc_peering_connection_id = aws_vpc_peering_connection.main.id
+  }
 
   tags = {
     Name = "public-rt-${split("-", var.availability_zones[count.index])[2]}"
@@ -91,6 +92,7 @@ resource "aws_route_table" "web" {
   route {
     cidr_block = var.default_vpc_cidr
     vpc_peering_connection_id =aws_vpc_peering_connection.main.id
+  }
 
   tags = {
     Name = "web-rt-${split("-", var.availability_zones[count.index])[2]}"
@@ -109,6 +111,7 @@ resource "aws_route_table" "app" {
   route {
     cidr_block = var.default_vpc_cidr
     vpc_peering_connection_id =aws_vpc_peering_connection.main.id
+  }
 
   tags = {
     Name = "app-rt-${split("-", var.availability_zones[count.index])[2]}"
@@ -127,6 +130,7 @@ resource "aws_route_table" "db" {
   route {
     cidr_block = var.default_vpc_cidr
     vpc_peering_connection_id =aws_vpc_peering_connection.main.id
+  }
 
   tags = {
     Name = "db-rt-${split("-", var.availability_zones[count.index])[2]}"
