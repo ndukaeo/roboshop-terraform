@@ -1,4 +1,6 @@
 env = "dev"
+baston_nodes = [172.31.92.162/32]
+
 vpc = {
   cidr = "10.10.0.0/16"
   public_subnets = ["10.10.0.0/24", "10.10.1.0/24"]
@@ -11,6 +13,17 @@ vpc = {
   default_vpc_cidr = "172.31.0.0/16"
 }
 
-
-
+ec2 = {
+  frontend = {
+    subnet_ref    = "web"
+    instance_type = "t3.small"
+    allow_port    = 80
+    allow_sg_cidr = ["10.10.0.0/24", "10.10.1.0/24"]
+#     capacity = {
+#       desired = 1
+#       max     = 1
+#       min     = 1
+#     }
+  }
+}
 
