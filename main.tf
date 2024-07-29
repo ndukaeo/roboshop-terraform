@@ -16,15 +16,33 @@ module "vpc" {
 module "apps" {
   source = "./modules/ec2"
 
-  for_each      = var.ec2
+  for_each      = var.apps
   name          = each.key
   instance_type = each.value["instance_type"]
   allow_port    = each.value["allow_port"]
   allow_sg_cidr = each.value["allow_sg_cidr"]
-  subnet_ids        = module.vpc.subnets[each.value["subnet_ref"]]
+  subnet_ids    = module.vpc.subnets[each.value["subnet_ref"]]
   vpc_id        = module.vpc.vpc_id
   env           = var.env
   bastion_nodes = var.bastion_nodes
-  capacity     = each.value["capacity"]
+  capacity      = each.value["capacity"]
+  asg           = true
+  vault_token   = var.vault_token
+}
+
+module "db" {
+  source = "./modules/ec2"
+
+  for_each      = var.db
+  name          = each.key
+  instance_type = each.value["instance_type"]
+  allow_port    = each.value["allow_port"]
+  allow_sg_cidr = each.value["allow_sg_cidr"]
+  subnet_ids    = module.vpc.subnets[each.value["subnet_ref"]]
+  vpc_id        = module.vpc.vpc_id
+  env           = var.env
+  bastion_nodes = var.bastion_nodes
+  asg           = false
+  vault_token   = var.vault_token
 }
 
