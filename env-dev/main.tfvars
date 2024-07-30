@@ -1,5 +1,6 @@
 env = "dev"
 bastion_nodes = ["172.31.92.162/32"]
+zone_id = "Z0153757236UOMMSDCGKR"
 
 vpc = {
   cidr             = "10.10.0.0/16"
