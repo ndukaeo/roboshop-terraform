@@ -14,6 +14,7 @@ module "vpc" {
 }
 
 module "apps" {
+  depends_on = [module.db]
   source = "./modules/ec2"
 
   for_each      = var.apps
