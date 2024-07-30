@@ -25,6 +25,55 @@ apps = {
       min     = 1
     }
   }
+
+  catalogue = {
+    subnet_ref    = "app"
+    instance_type = "t3.small"
+    allow_port    = 8080
+    allow_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24"]
+    capacity = {
+      desired = 1
+      max     = 1
+      min     = 1
+    }
+  }
+#
+#   user = {
+#     subnet_ref    = "app"
+#     instance_type = "t3.small"
+#     allow_port    = 80
+#     allow_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24"]
+#     capacity = {
+#       desired = 1
+#       max     = 1
+#       min     = 1
+#     }
+#   }
+#
+#   cart = {
+#     subnet_ref    = "app"
+#     instance_type = "t3.small"
+#     allow_port    = 80
+#     allow_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24"]
+#     capacity = {
+#       desired = 1
+#       max     = 1
+#       min     = 1
+#     }
+#   }
+#
+#   shipping = {
+#     subnet_ref    = "app"
+#     instance_type = "t3.small"
+#     allow_port    = 80
+#     allow_sg_cidr = ["10.10.2.0/24", "10.10.3.0/24"]
+#     capacity = {
+#       desired = 1
+#       max     = 1
+#       min     = 1
+#     }
+#   }
+
 }
 
 db = {
