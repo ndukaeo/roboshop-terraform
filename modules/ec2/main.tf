@@ -22,7 +22,7 @@ resource "aws_security_group" "allow_tls" {
     from_port   = var.allow_port
     to_port     = var.allow_port
     protocol    = "TCP"
-    cidr_blocks = var.allow_sg_cidr
+    cidr_blocks = var.name == "frontend" ? ["0.0.0.0/0"] : var.allow_sg_cidr
   }
 
   tags = {
