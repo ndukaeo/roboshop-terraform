@@ -15,24 +15,25 @@ module "vpc" {
 
 module "apps" {
   depends_on = [module.db, module.vpc]
-  source = "./modules/ec2"
+  source = "./modules/asg"
 
-  for_each      = var.apps
-  name          = each.key
-  instance_type = each.value["instance_type"]
-  allow_port    = each.value["allow_port"]
-  allow_sg_cidr = each.value["allow_sg_cidr"]
-  subnet_ids    = module.vpc.subnets[each.value["subnet_ref"]]
-  vpc_id        = module.vpc.vpc_id
-  env           = var.env
-  bastion_nodes = var.bastion_nodes
-  capacity      = each.value["capacity"]
-  asg           = true
-  vault_token   = var.vault_token
-  zone_id       = var.zone_id
-  internal      = each.value["lb_internal"]
-  lb_subnet_ids = module.vpc.subnets[each.value["lb_subnet_ref"]]
+  for_each         = var.apps
+  name             = each.key
+  instance_type    = each.value["instance_type"]
+  allow_port       = each.value["allow_port"]
+  allow_sg_cidr    = each.value["allow_sg_cidr"]
+  subnet_ids       = module.vpc.subnets[each.value["subnet_ref"]]
+  vpc_id           = module.vpc.vpc_id
+  env              = var.env
+  bastion_nodes    = var.bastion_nodes
+  capacity         = each.value["capacity"]
+  asg              = true
+  vault_token      = var.vault_token
+  zone_id          = var.zone_id
+  internal         = each.value["lb_internal"]
+  lb_subnet_ids    = module.vpc.subnets[each.value["lb_subnet_ref"]]
   allow_lb_sg_cidr = each.value["allow_lb_sg_cidr"]
+  acm_https_arn    = each.value["acm_https_arn"]
 }
 
 module "db" {
